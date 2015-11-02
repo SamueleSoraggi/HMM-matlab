@@ -10,14 +10,12 @@
 %   data : NxD vector, where N is the number of observations and D their
 %          dimension. If you set data=[], a simulator window will be opened
 %          and you can paint your own trajectory with the mouse.
-%   Clustering : clustering method for the hidden states
+%   clustering : clustering method for the hidden states
 %          km = kmeans
 %          kmvar = kmeans with the number of states set by the variational
 %                  EM
 %          var = initialization with the variational EM
-%          kmgap = kmeans with the gap statistic (very slow and abandoned)
-%   Starting : a string that set the initialization of the model. 
-%          km = kmeans
+%   starting : a string that set the initialization of the model. 
 %          kmvar = kmeans with the number of states set by the variational
 %                  EM
 %          var = initialization with the variational EM
