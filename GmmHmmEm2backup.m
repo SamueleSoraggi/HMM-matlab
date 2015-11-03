@@ -59,7 +59,7 @@
 %   loglike: loglikelihood for each iteration of the EM
  
 function [new_trans_prob,new_start_prob,Param,gmm_obj,loglike,track,track2]=...
-       GmmHmmEm2(data,clustering,starting,normalize_int,soglia_em,max_loop,Hidden,info,printOpt,reg,varargin)
+       GmmHmmEm2(data,clustering,starting,normalize_int,soglia_em,max_loop,Hidden,info,reg,varargin)
      
 addpath(genpath('./My Rubbish'))  
 
@@ -223,7 +223,6 @@ for j = 1:Q
     gmm_obj{j} = gmdistribution(Param{j}.mu',Param{j}.sigma,Param{j}.mix);
 end
 
-if printOpt
 %Painting :-)
 if D==2
     colori = jet(length(Param));
@@ -259,7 +258,6 @@ else
     s2 = sprintf('\n %d Hidden states');
     title(strcat(s1,s2))
     drawnow;    
-end
 end
 
 %Hidden parameters
@@ -307,7 +305,7 @@ cont = 0;
     new_trans_prob = My_normalizza(new_trans_prob);
     %print info
     if strcmp(info,'yes')
-        str = sprintf('Loglike: %.5f at step %d',loglike(cont),cont);
+        str = sprintf('Loglike: %.5f at the step %d',loglike(cont),cont);
         disp(str);    
     end
     %calculating responsibilities and saving them in Nu
@@ -346,7 +344,6 @@ cont = 0;
     end
     
     %Painting :-)
-if printOpt
     if D==2
         clf(figura); 
         colori = jet(Q);
@@ -360,7 +357,7 @@ if printOpt
             end
         end
         hold off
-        s1 = sprintf('Gmm (projected) at step %d',cont);
+        s1 = sprintf('Gmm (projected) at the step %d',cont);
         s2 = sprintf('\nLogLikelihood = %f',loglike(cont));
         s3 = sprintf('\n%d Hidden states',Q);
         title(strcat(s1,s2,s3))
@@ -395,7 +392,7 @@ if printOpt
             end
         end
         hold off
-        s1 = sprintf('Gmm (projected) at step %d',cont);
+        s1 = sprintf('Gmm (projected) at the step %d',cont);
         s2 = sprintf('\nLogLikelihood = %f',loglike(cont));
         s3 = sprintf('\n%d Hidden states',Q);
         title(strcat(s1,s2,s3))
@@ -416,7 +413,7 @@ if printOpt
         drawnow;
         pause(0.02);    
     end
- end     
+      
     %Convergence control
     if cont > 1
        if abs(loglike(cont)-loglike(cont-1)) < soglia_em, fine=1; end
